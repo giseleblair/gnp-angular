@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { catchError, filter, map, of, startWith, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { PagesComponent } from '../pages/pages.component';
 
 @Component({
   selector: 'app-dynamicpage',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, NgIf],
+  imports: [AsyncPipe, JsonPipe, NgIf, PagesComponent],
   templateUrl: './dynamicpage.component.html'
 })
 export class DynamicPageComponent {
