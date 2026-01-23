@@ -2,6 +2,31 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
 
+## Environment variables
+
+Zesty connection values are centralized in `src/environments/environment.ts`:
+
+- `zesty_stage_cms`: Base URL for the Zesty instance.
+- `zesty_stage_pw`: Access token appended as `zpw` in JSON requests.
+
+When these values change, all Zesty requests update automatically.
+
+## Dynamic Zesty routes
+
+The app uses dynamic routes for one- and two-segment paths (for example, `/business` or `/es-mx/public-sector`). The `DynamicPageComponent` reads the current URL path and requests JSON from:
+
+```
+${zesty_stage_cms}/${path}?toJSON&zpw=${zesty_stage_pw}
+```
+
+The response is stored in `data$` and can be accessed in the template for rendering content fields. This allows any Zesty URL to map directly to a dynamic route without adding new Angular routes.
+
+Related files:
+
+- `src/app/dynamicpage/dynamicpage.component.ts`
+- `src/app/dynamicpage/dynamicpage.component.html`
+- `src/app/app.routes.ts`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
