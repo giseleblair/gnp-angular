@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { catchError, filter, map, of, startWith, switchMap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { FreestyleExampleComponent } from '../freestyle_example/freestyle-example.component';
 import { PageData, PagesComponent } from '../pages/pages.component';
 
 type DynamicPageResponse = PageData & {
@@ -15,7 +16,7 @@ type DynamicPageResponse = PageData & {
 @Component({
   selector: 'app-dynamicpage',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe, NgIf, PagesComponent],
+  imports: [AsyncPipe, JsonPipe, NgIf, PagesComponent, FreestyleExampleComponent],
   templateUrl: './dynamicpage.component.html'
 })
 export class DynamicPageComponent {
@@ -26,6 +27,12 @@ export class DynamicPageComponent {
   );
   readonly data$ = this.path$.pipe(
     switchMap((path) => {
+      if (path === 'freestyle-example') {
+        return of({
+          meta: { model_name: 'freestyle_example' }
+        } as DynamicPageResponse);
+      }
+
       const endpoint = `${environment.zesty_stage_cms}/${encodeURI(
         path
       )}?toJSON&zpw=${environment.zesty_stage_pw}`;

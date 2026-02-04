@@ -1,7 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -19,7 +18,7 @@ interface SitemapEntry {
 @Component({
   selector: 'app-sitemap',
   standalone: true,
-  imports: [AsyncPipe, NgIf, NgFor, RouterLink],
+  imports: [AsyncPipe, NgIf, NgFor],
   templateUrl: './sitemap.component.html'
 })
 export class SitemapComponent {
